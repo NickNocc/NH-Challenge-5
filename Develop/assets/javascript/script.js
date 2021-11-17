@@ -64,13 +64,6 @@ $(document).ready(function() {
     // middle box displays the event + lets you input text when you click on center
     // right box has an icon and on click will save whatever you have inputted into the box
 
-
-
-    if (!taskList) {
-        taskList = {
-            saves: []
-        };
-    }
     // Loop that replaces empty blank blocks with previous tasks
     var saveTask = function() {
         localStorage.setItem("tasks", JSON.stringify(taskList));
@@ -101,6 +94,21 @@ $(document).ready(function() {
         saveTask();
     });
 
+    var loadTasks = function(){
+        taskList = JSON.parse(localStorage.getItem("tasks"));
+
+        if (!taskList) {
+            taskList = {
+                saves: []
+            };
+        }
+        
+        $.each(taskList, function(list, arr){
+            arr.forEach(function() {
+                
+            })
+        })
+    };
 
 
     // check every 5m to see if an event has passed, if it has remove it's current class and add the appropriate class

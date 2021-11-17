@@ -25,16 +25,16 @@ $(document).ready(function() {
         var allTime = time + ampm;
 
         // Makes our planner boxes and gives them ids for later | Also inserts other elements 
-        $(taskHolder).append('<div class="col-1 bg-primary h-100 border border-dark" id="left-box hour-' + time + '"><p>' + allTime + '</p></div>');
-        $(taskHolder).append('<div class="col-10 bg-success h-100 border border-dark" id="center-box hour-' + time + '"><p> </p></div>');
-        $(taskHolder).append('<div class="col-1 bg-info h-100 border border-dark" id="right-box hour-' + time + '"></div>');
+        $(taskHolder).append('<div class="col-1 bg-primary h-100 border border-dark left-box"><span><p>' + allTime + '</p></span></div>');
+        $(taskHolder).append('<div class="col-10 bg-success h-100 border border-dark center-box" id="frickFrack' + time + '" data-time=' + allTime + '><p> </p></div>');
+        $(taskHolder).append('<div class="col-1 bg-info h-100 border border-dark right-box" data-time=' + allTime + '></div>');
         
         // to keep up with the for loop
         time++;
     };
 
     // changes text to input field on click
-    $(".col-10").on("click", "p", function(){
+    $(".center-box").on("click", "p", function(){
         // selects closest p element to what was clicked
         var clickedBox = $(this).closest("p").text().trim();
 
@@ -46,10 +46,12 @@ $(document).ready(function() {
 
     });
     // When the user clicks off of the text area, it is replaced with another p element
-    $(".col-10").on("blur", "textarea", function(){
+    $(".center-box").on("blur", "textarea", function(){
         var text = $(this).val();
-        var status = $(this).closest("#center-box").attr("id");
-        // readds our p element with space to avoid an unclickable box
+        var status = $(this).closest(".center-box").attr("id");
+        saveTask();
+        console.log(taskList);
+        // re-adds our p element with space to avoid an unclickable box
         var taskP = $("<p>").addClass("m-1").text(text + "      ");
         $(this).replaceWith(taskP);
     });
@@ -65,16 +67,36 @@ $(document).ready(function() {
 
     if (!taskList) {
         taskList = {
-            date: [],
-            hour: [],
-            info: [],
-            status: []
+            hour: []
         };
     }
     // Loop that replaces empty blank blocks with previous tasks
+    var saveTask = function() {
+        localStorage.setItem("tasks", JSON.stringify(taskList));
+    };
 
+    $(".right-box").on("click", function(){
+        var taskText = $(".center-box").find("p").text().trim();
+        var saveHour = $(this).data();
+        var test = $(this).closest("p").data();
 
+        for (var i = 0; i < 13; i++) {
+            if (time > 12) {
+                time = 1;
+            }
+            console.log("time:" + allTime);
+            var testy = $("#frickFrack" + time).data();
+            console.log(testy);
+            if (saveHour === testy) {
+                alert("pog");
+            }
 
+            time++;
+        }
+        // console.log(test);
+        // console.log(saveHour);
+        saveTask();
+    });
 
 
 

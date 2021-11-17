@@ -68,7 +68,7 @@ $(document).ready(function() {
 
     if (!taskList) {
         taskList = {
-            hour: []
+            saves: []
         };
     }
     // Loop that replaces empty blank blocks with previous tasks
@@ -85,14 +85,12 @@ $(document).ready(function() {
             if (time > 12) {
                 time = 1;
             }
-            var testy = $("#frickFrack" + time).data("time");
-
-            var testy2 = $("#frickFrack" + time).find("p").text().trim();
-            // console.log("testy2:" + testy2);
-            if (testy2 != "") {
+            var hourSave = $("#frickFrack" + time).data("time");
+            var textSave = $("#frickFrack" + time).find("p").text().trim();
+            if (textSave != "") {
                 tempArr.push({
-                    hour: testy,
-                    text: testy2
+                    hour: hourSave,
+                    text: textSave
             });   
             }
 
@@ -100,8 +98,6 @@ $(document).ready(function() {
         }
         taskList = tempArr;
         console.log(taskList);
-        // console.log(test);
-        // console.log(saveHour);
         saveTask();
     });
 

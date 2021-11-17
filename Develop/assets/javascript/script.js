@@ -1,6 +1,8 @@
 var currentTime = moment().format("dddd, MMMM Qo");
 var timeDisplay = $("#currentDay").text(currentTime);
-var taskList = {};
+var taskList = {
+    saves: []
+};
 var taskHolder = $(".row")
 
 // loads the js when document is fully loaded
@@ -16,7 +18,7 @@ $(document).ready(function() {
     
 
     // starts planner at 8am to 9pm
-    for (var i = 8; i < 22; i++) {
+    for (var i = 8; i < 20; i++) {
         // changes time from am to pm and restarts time to match
         if (time > 12) {
             time = 1;
@@ -49,8 +51,7 @@ $(document).ready(function() {
     $(".center-box").on("blur", "textarea", function(){
         var text = $(this).val();
         var status = $(this).closest(".center-box").attr("id");
-        saveTask();
-        console.log(taskList);
+        // saveTask();
         // re-adds our p element with space to avoid an unclickable box
         var taskP = $("<p>").addClass("m-1").text(text + "      ");
         $(this).replaceWith(taskP);
@@ -76,23 +77,29 @@ $(document).ready(function() {
     };
 
     $(".right-box").on("click", function(){
-        var taskText = $(".center-box").find("p").text().trim();
-        var saveHour = $(this).data();
-        var test = $(this).closest("p").data();
+        var time = 8;
+        var tempArr = [];
 
-        for (var i = 0; i < 13; i++) {
+        for (var i = 0; i < 12; i++) {
+
             if (time > 12) {
                 time = 1;
             }
-            console.log("time:" + allTime);
-            var testy = $("#frickFrack" + time).data();
-            console.log(testy);
-            if (saveHour === testy) {
-                alert("pog");
+            var testy = $("#frickFrack" + time).data("time");
+
+            var testy2 = $("#frickFrack" + time).find("p").text().trim();
+            // console.log("testy2:" + testy2);
+            if (testy2 != "") {
+                tempArr.push({
+                    hour: testy,
+                    text: testy2
+            });   
             }
 
             time++;
         }
+        taskList = tempArr;
+        console.log(taskList);
         // console.log(test);
         // console.log(saveHour);
         saveTask();

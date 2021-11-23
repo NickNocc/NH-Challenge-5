@@ -19,7 +19,8 @@ $(document).ready(function() {
     
 
     // starts planner at 8am to 9pm
-    for (var i = 8; i < 20; i++) {
+    var boxBuilder = function(){
+        for (var i = 8; i < 20; i++) {
         // changes time from am to pm and restarts time to match
         if (time > 12) {
             time = 1;
@@ -29,12 +30,12 @@ $(document).ready(function() {
 
         // Makes our planner boxes and gives them ids for later | Also inserts other elements 
         $(taskHolder).append('<div class="col-1 bg-primary h-100 border border-dark left-box"><span><p>' + allTime + '</p></span></div>');
-        $(taskHolder).append('<div class="col-10 bg-success h-100 border border-dark center-box" id="frickFrack' + time + '" data-time=' + allTime + '><p> </p></div>');
+        $(taskHolder).append('<div class="col-10 bg-success h-100 border border-dark center-box" id="frickFrack' + time + '" data-time=' + allTime + '><p id=pText' + allTime + '> </p></div>');
         $(taskHolder).append('<div class="col-1 bg-info h-100 border border-dark right-box" data-time=' + allTime + '></div>');
         
         // to keep up with the for loop
         time++;
-    };
+    }};
 
     // changes text to input field on click
     $(".center-box").on("click", "p", function(){
@@ -114,9 +115,20 @@ $(document).ready(function() {
                 // When our saved task finds its hour, the text will be written to the box
                 if (test1 == taskHour) {
                     // finds the p element for our box
-                    var boxText = $(taskHour).closest("p");
-                    // Sets the text in the correct hour to match the saved text
+                    var poop = taskText;
+                    var testy1 = $("#ptext" + test1);
+                    var textStuff = $("<p>").text(poop);
+                    console.log(textStuff)
+                    console.log(testy1);
+                    $(testy1).replaceWith(textStuff);
+                    console.log(textStuff)
+                    console.log(testy1);
+
+                    testy1 = taskText;
                     
+
+
+                    // Sets the text in the correct hour to match the saved text
                 }
 
             }
@@ -124,7 +136,7 @@ $(document).ready(function() {
             time++;
         };
     };
-
+    boxBuilder();
     loadTasks();
     // check every 5m to see if an event has passed, if it has remove it's current class and add the appropriate class
 

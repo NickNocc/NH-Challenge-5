@@ -1,5 +1,6 @@
 var currentTime = moment().format("dddd, MMMM Qo");
 var timeDisplay = $("#currentDay").text(currentTime);
+var time = 8;
 var taskList = {
     saves: []
 };
@@ -70,7 +71,6 @@ $(document).ready(function() {
     };
 
     $(".right-box").on("click", function(){
-        var time = 8;
         var tempArr = [];
 
         for (var i = 0; i < 12; i++) {
@@ -95,22 +95,37 @@ $(document).ready(function() {
     });
 
     var loadTasks = function(){
+        // loads tasklist for previous section
         taskList = JSON.parse(localStorage.getItem("tasks"));
-
+        // if nothing is saved it will make a new array for the user
         if (!taskList) {
             taskList = {
                 saves: []
             };
         }
-        
-        $.each(taskList, function(list, arr){
-            arr.forEach(function() {
-                
-            })
-        })
+        // Looks at our previous tasks and finds it's hour + text content
+        for (var i = 0; i < taskList.length; i++) {
+            var taskHour = taskList[i].hour;
+            var taskText = taskList[i].text;
+            // Looks at each hour to see which elements we have saves for
+            for (var w = 1; w < 13; w++) {
+                // Selects the time data so we have the correct box
+                var test1 = $("#frickFrack" + w).data("time");
+                // When our saved task finds its hour, the text will be written to the box
+                if (test1 == taskHour) {
+                    // finds the p element for our box
+                    var boxText = $(taskHour).closest("p");
+                    // Sets the text in the correct hour to match the saved text
+                    
+                }
+
+            }
+
+            time++;
+        };
     };
 
-
+    loadTasks();
     // check every 5m to see if an event has passed, if it has remove it's current class and add the appropriate class
 
 });

@@ -29,9 +29,9 @@ $(document).ready(function() {
         var allTime = time + ampm;
 
         // Makes our planner boxes and gives them ids for later | Also inserts other elements 
-        $(taskHolder).append('<div class="col-1 bg-primary h-100 border border-dark left-box"><span><p>' + allTime + '</p></span></div>');
-        $(taskHolder).append('<div class="col-10 bg-success h-100 border border-dark center-box" id="frickFrack' + time + '" data-time=' + allTime + '><p id=pText' + allTime + '> </p></div>');
-        $(taskHolder).append('<div class="col-1 bg-info h-100 border border-dark right-box" data-time=' + allTime + '></div>');
+        $(taskHolder).append('<div class="col-1 h-100 border-top rounded-end border-dark left-box"><span><p>' + allTime + '</p></span></div>');
+        $(taskHolder).append('<div class="col-10 bg-success p-3 mb-1 rounded h-100 border border-dark center-box" id="frickFrack' + time + '" data-time=' + allTime + '><p id=pText' + allTime + '> </p></div>');
+        $(taskHolder).append('<div class="col-1 bg-info h-100 rounded border-left border-dark right-box" data-time=' + allTime + '></div>');
         
         // to keep up with the for loop
         time++;

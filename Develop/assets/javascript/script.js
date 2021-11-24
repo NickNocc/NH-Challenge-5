@@ -19,7 +19,7 @@ $(document).ready(function() {
     
 
     // starts planner at 8am to 9pm
-    var boxBuilder = function(){
+
         for (var i = 8; i < 20; i++) {
         // changes time from am to pm and restarts time to match
         if (time > 12) {
@@ -35,7 +35,7 @@ $(document).ready(function() {
         
         // to keep up with the for loop
         time++;
-    }};
+    };
 
     // changes text to input field on click
     $(".center-box").on("click", "p", function(){
@@ -111,24 +111,12 @@ $(document).ready(function() {
             // Looks at each hour to see which elements we have saves for
             for (var w = 1; w < 13; w++) {
                 // Selects the time data so we have the correct box
-                var test1 = $("#frickFrack" + w).data("time");
+                var timeCheck = $("#frickFrack" + w).data("time");
                 // When our saved task finds its hour, the text will be written to the box
-                if (test1 == taskHour) {
-                    // finds the p element for our box
-                    var poop = taskText;
-                    var testy1 = $("#ptext" + test1);
-                    var textStuff = $("<p>").text(poop);
-                    console.log(textStuff)
-                    console.log(testy1);
-                    $(testy1).replaceWith(textStuff);
-                    console.log(textStuff)
-                    console.log(testy1);
+                if (timeCheck == taskHour) {
+                    // finds the p element for our box and sets the content to our saved content
+                    $("#pText" + timeCheck).text(taskText);
 
-                    testy1 = taskText;
-                    
-
-
-                    // Sets the text in the correct hour to match the saved text
                 }
 
             }
@@ -136,7 +124,7 @@ $(document).ready(function() {
             time++;
         };
     };
-    boxBuilder();
+    // boxBuilder();
     loadTasks();
     // check every 5m to see if an event has passed, if it has remove it's current class and add the appropriate class
 

@@ -1,5 +1,6 @@
 var currentTime = moment().format("dddd, MMMM Qo");
-var timeDisplay = $("#currentDay").text(currentTime);
+
+
 var time = 8;
 var taskList = {
     saves: []
@@ -19,23 +20,21 @@ $(document).ready(function() {
     
 
     // starts planner at 8am to 9pm
-
-        for (var i = 8; i < 20; i++) {
-        // changes time from am to pm and restarts time to match
-        if (time > 12) {
-            time = 1;
-            ampm = "PM";
-        };  
-        var allTime = time + ampm;
-
-        // Makes our planner boxes and gives them ids for later | Also inserts other elements 
-        $(taskHolder).append('<div class="col-1 h-100 border-top rounded-end border-dark left-box"><span><p>' + allTime + '</p></span></div>');
-        $(taskHolder).append('<div class="col-10 bg-success p-3 mb-1 rounded h-100 border border-dark center-box" id="frickFrack' + time + '" data-time=' + allTime + '><p id=pText' + allTime + '> </p></div>');
-        $(taskHolder).append('<div class="col-1 bg-info h-100 rounded border-left border-dark right-box" data-time=' + allTime + '></div>');
-        
-        // to keep up with the for loop
-        time++;
-    };
+ for (var i = 8; i < 20; i++) {
+    // changes time from am to pm and restarts time to match
+    if (time > 12) {
+        time = 1;
+        ampm = "PM";
+    };  
+    var allTime = time + ampm;
+    // Makes our planner boxes and gives them ids for later | Also inserts other elements 
+    $(taskHolder).append('<div class="col-1 h-100 border-top rounded-end border-dark left-box"><span><p>' + allTime + '</p></span></div>');
+    $(taskHolder).append('<div class="col-10 bg-success p-3 mb-1 rounded h-100 border border-dark center-box" id="frickFrack' + time + '" data-time=' + allTime + '><p id=pText' + allTime + '> </p></div>');
+    $(taskHolder).append('<div class="col-1 bg-info h-100 rounded border-left border-dark right-box" data-time=' + allTime + '><img src="https://img.icons8.com/ios/50/000000/save--v1.png"/></div>');
+    
+    // to keep up with the for loop
+    time++;
+};
 
     // changes text to input field on click
     $(".center-box").on("click", "p", function(){
@@ -124,6 +123,10 @@ $(document).ready(function() {
             time++;
         };
     };
+    var update = function() {
+        var timeDisplay = $("#currentDay").text(currentTime);
+    }
+    setInterval(update, 1000);
     // boxBuilder();
     loadTasks();
     // check every 5m to see if an event has passed, if it has remove it's current class and add the appropriate class

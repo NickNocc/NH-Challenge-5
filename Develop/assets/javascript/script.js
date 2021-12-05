@@ -1,6 +1,3 @@
-var currentTime = moment().format("dddd, MMMM Qo");
-
-
 var time = 8;
 var taskList = {
     saves: []
@@ -9,6 +6,9 @@ var taskHolder = $(".row")
 
 // loads the js when document is fully loaded
 $(document).ready(function() {
+    var currentTime = moment().format("dddd, MMMM Qo");
+    var timeDisplay = $("#currentDay").text(currentTime);
+
     // sets whether we are in am or pm
     var ampm = "AM";
     // variable that remembers what time to start the planner at
@@ -30,7 +30,7 @@ $(document).ready(function() {
     // Makes our planner boxes and gives them ids for later | Also inserts other elements 
     $(taskHolder).append('<div class="col-1 h-100 border-top rounded-end border-dark left-box"><span><p>' + allTime + '</p></span></div>');
     $(taskHolder).append('<div class="col-10 bg-success p-3 mb-1 rounded h-100 border border-dark center-box" id="frickFrack' + time + '" data-time=' + allTime + '><p id=pText' + allTime + '> </p></div>');
-    $(taskHolder).append('<div class="col-1 bg-info h-100 rounded border-left border-dark right-box" data-time=' + allTime + '><img src="https://img.icons8.com/ios/50/000000/save--v1.png"/></div>');
+    $(taskHolder).append('<div class="col-1 bg-info h-100 rounded border-left border-dark right-box" data-time=' + allTime + '><button class="saveBtn"><img src="https://img.icons8.com/ios/50/000000/save--v1.png"/></button></div>');
     
     // to keep up with the for loop
     time++;
@@ -123,10 +123,9 @@ $(document).ready(function() {
             time++;
         };
     };
-    var update = function() {
-        var timeDisplay = $("#currentDay").text(currentTime);
+    var timeUpdate = function() {
     }
-    setInterval(update, 1000);
+
 
     var auditTime = function() {
         for (var w = 1; w < 13; w++) {

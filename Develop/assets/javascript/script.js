@@ -127,9 +127,22 @@ $(document).ready(function() {
         var timeDisplay = $("#currentDay").text(currentTime);
     }
     setInterval(update, 1000);
+
+    var auditTime = function() {
+        for (var w = 1; w < 13; w++) {
+        var timeCheck = $("#frickFrack" + w).data("time");
+        var passedTime = moment(timeCheck, "L").set("hour")
+        // if (timeCheck < )
+
+        // }
+    };
+    
+    auditTime();
+
     // boxBuilder();
     loadTasks();
     // check every 5m to see if an event has passed, if it has remove it's current class and add the appropriate class
 
+    
+}
 });
-

@@ -64,7 +64,7 @@ $(document).ready(function() {
     // left box displays time + am/pm
     // middle box displays the event + lets you input text when you click on center
     // right box has an icon and on click will save whatever you have inputted into the box
-// asd
+// asdfwearsadf
     // Loop that replaces empty blank blocks with previous tasks
     var saveTask = function() {
         localStorage.setItem("tasks", JSON.stringify(taskList));
